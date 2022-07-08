@@ -43,7 +43,9 @@ namespace Calculator
 
             if (str == "C")
 
-             textLabel.Text = "";
+                textLabel.Text = "";
+
+
              else if (str == "=") {
 
                 string? value = new DataTable().Compute(textLabel.Text, null).ToString();
@@ -51,7 +53,7 @@ namespace Calculator
              }
             else
 
-            textLabel.Text += str;
+                textLabel.Text += str;
 
         }
     }
