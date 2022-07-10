@@ -28,33 +28,47 @@ namespace Calculator
             InitializeComponent();
 
 
-            foreach(UIElement el in MainView.Children)
+            foreach(UIElement element in MainView.Children)
             {
-                if(el is Button)
+                if(element is Button)
                 {
-                    ((Button)el).Click += Button_Click;
+                    ((Button)element).Click += Button_Click;
                 }
             }
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           var str = (string)((Button)e.OriginalSource).Content;
-
+           string str = (string)((Button)e.OriginalSource).Content;
             if (str == "C")
 
-                textLabel.Text = "";
+               textLabel.Text =" ";           
 
-
-             else if (str == "=") {
+            else if (str == "=")
+            {
 
                 string? value = new DataTable().Compute(textLabel.Text, null).ToString();
                 textLabel.Text = value;
-             }
-            else
+            }
+            
+            else if (str == "<")
+            {
+                 textLabel.Text = textLabel.Text.Remove(textLabel.Text.Length - 1);
+               
+            }
+           
+            else if(str == "CE")
 
+            {
+                for(int i = 0; i < textLabel.Text.Length; ++i)
+
+               textLabel.Text = textLabel.Text.Remove(textLabel.Text.Length - i);
+              
+
+            }
+              else                
                 textLabel.Text += str;
-
+          
         }
     }
      
