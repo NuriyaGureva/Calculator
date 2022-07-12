@@ -39,39 +39,42 @@ namespace Calculator
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-           string str = (string)((Button)e.OriginalSource).Content;
-            if (str == "C")
+            string str = (string)((Button)e.OriginalSource).Content;
 
-                 textLabel.Text =" ";
-                
-
-            else if (str == "=")
+            if (str == "CE")
             {
-                string? value = new DataTable().Compute(textLabel.Text, null).ToString();
-                textLabel.Text = value;
-            }
+                var text = textLabel.Text.Trim();
 
+                int plusIndex = text.LastIndexOf('+');
+                int minusIndex = text.LastIndexOf('-');
+                int divIndex = text.LastIndexOf('/');
+                int multIndex = text.LastIndexOf('*');
+
+                var indexes = new int[] { plusIndex, minusIndex, divIndex, multIndex };                
+                var maxIndex = indexes.Max()+1;
+
+                var lenght = text.Substring(0, maxIndex);
+                textLabel.Text = lenght;
+            } 
+            else if (str == "C")
+            {
+                textLabel.Text = " ";
+
+            }           
             else if (str == "<")
             {
                 textLabel.Text = textLabel.Text.Remove(textLabel.Text.Length - 1);
 
             }
-
-            else if (str == "CE")
-
+            else if (str == "=")
             {
-                for (int i = 0; i < textLabel.Text.Length; ++i)
-                {
-
-                    textLabel.Text = textLabel.Text.Remove(textLabel.Text.Length - i);
-
-                }
-
+                string? value = new DataTable().Compute(textLabel.Text, null).ToString();
+                textLabel.Text = value;
+            }                   
+            else 
+            {
+                textLabel.Text += str;          
             }
-            else
-                textLabel.Text += str;
-          
         }
-    }
-     
+    }    
 }
